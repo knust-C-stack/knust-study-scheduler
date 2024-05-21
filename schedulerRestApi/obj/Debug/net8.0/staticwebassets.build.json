@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "K1lal3TZOeSgyX69sVG+o1gRuV582pUvawAx0X2+sNA=",
+  "Source": "schedulerRestApi",
+  "BasePath": "_content/schedulerRestApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
