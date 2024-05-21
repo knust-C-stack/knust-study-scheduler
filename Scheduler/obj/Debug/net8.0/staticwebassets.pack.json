@@ -1,0 +1,77 @@
+{
+  "Files": [
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/bin/Debug/net8.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/obj/Debug/net8.0/compressed/qiaz4c2noi.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/obj/Debug/net8.0/scopedcss/bundle/Scheduler.styles.css",
+      "PackagePath": "staticwebassets/Scheduler.styles.css"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/obj/Debug/net8.0/service-worker-assets.js",
+      "PackagePath": "staticwebassets/service-worker-assets.js"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/obj/Debug/net8.0/service-worker/service-worker.published.js",
+      "PackagePath": "staticwebassets/service-worker.js"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/css/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/icon-512.png",
+      "PackagePath": "staticwebassets/icon-512.png"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/manifest.webmanifest",
+      "PackagePath": "staticwebassets/manifest.webmanifest"
+    },
+    {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/sample-data/weather.json",
+      "PackagePath": "staticwebassets/sample-data/weather.json"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Scheduler.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.Scheduler.props",
+      "PackagePath": "build\\Scheduler.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Scheduler.props",
+      "PackagePath": "buildMultiTargeting\\Scheduler.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Scheduler.props",
+      "PackagePath": "buildTransitive\\Scheduler.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
