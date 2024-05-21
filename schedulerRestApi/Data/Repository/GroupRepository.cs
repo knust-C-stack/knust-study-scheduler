@@ -72,6 +72,7 @@ namespace schedulerRestApi.Data.Repository
 
             group.Name = groupDTO.Name;
             group.Description = groupDTO.Description;
+            group.CreatedBy = groupDTO.CreatedBy;
 
             await _context.SaveChangesAsync();
 
