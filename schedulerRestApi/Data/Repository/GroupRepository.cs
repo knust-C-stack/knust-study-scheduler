@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using schedulerRestApi.Data.DTOs;
 using schedulerRestApi.Models;
+using Microsoft.Data.SqlClient;
+
 
 namespace schedulerRestApi.Data.Repository
 {
@@ -18,23 +20,13 @@ namespace schedulerRestApi.Data.Repository
 
         public async Task<GroupDTO> CreateGroupAsync(GroupDTO groupDTO)
         {
-            var group = new Group
-            {
-                Name = groupDTO.Name,
-                Description = groupDTO.Description,
-                CreatedBy = groupDTO.CreatedBy,
-            };
 
-            _context.Groups.Add(group);
-            await _context.SaveChangesAsync();
-
-            return new GroupDTO
-            {
-                Id = group.Id,
-                Name = group.Name,
-                Description = group.Description,
-                CreatedBy = group.CreatedBy,
-            };
+            int AffectedRows = await  _context.Database.ExecuteSqlAsync($"Exec uspCreateGroup {groupDTO.Name},{groupDTO.Description},{groupDTO.CreatedBy}");
+            if(AffectedRows > 0){
+                return groupDTO;
+            }
+           
+             return new GroupDTO();
         }
 
         public async Task<GroupDTO> GetGroupByIdAsync(int id)
@@ -65,37 +57,43 @@ namespace schedulerRestApi.Data.Repository
 
         public async Task<GroupDTO> UpdateGroupAsync(int id, GroupDTO groupDTO)
         {
-            var group = await _context.Groups.FindAsync(id);
+            // Prepare the SQL command with parameters
+            var commandText = "EXEC uspUpdateGroup @id, @name, @description, @createdBy";
+            
+            // Execute the stored procedure
+            await _context.Database.ExecuteSqlRawAsync(commandText,
+                new SqlParameter("@id", id),
+                new SqlParameter("@name", groupDTO.Name),
+                new SqlParameter("@description", groupDTO.Description),
+                new SqlParameter("@createdBy", groupDTO.CreatedBy));
 
-            if (group == null)
+            // Optionally, retrieve the updated group from the database to return the updated data
+            var updatedGroup = await _context.Groups.FindAsync(id);
+
+            if (updatedGroup == null)
                 return null;
-
-            group.Name = groupDTO.Name;
-            group.Description = groupDTO.Description;
-            group.CreatedBy = groupDTO.CreatedBy;
-
-            await _context.SaveChangesAsync();
 
             return new GroupDTO
             {
-                Id = group.Id,
-                Name = group.Name,
-                Description = group.Description,
-                CreatedBy = group.CreatedBy,
+                Id = updatedGroup.Id,
+                Name = updatedGroup.Name,
+                Description = updatedGroup.Description,
+                CreatedBy = updatedGroup.CreatedBy,
             };
         }
 
+
         public async Task<bool> DeleteGroupAsync(int id)
         {
-            var group = await _context.Groups.FindAsync(id);
+            var commandText = "EXEC uspDeleteGroup @id";
+            
+            // Execute the stored procedure
+            var affectedRows = await _context.Database.ExecuteSqlRawAsync(commandText,
+                new SqlParameter("@id", id));
 
-            if (group == null)
-                return false;
-
-            _context.Groups.Remove(group);
-            await _context.SaveChangesAsync();
-
-            return true;
+            // Check if any rows were affected (i.e., a group was deleted)
+            return affectedRows > 0;
         }
+
     }
 }

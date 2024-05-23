@@ -24,7 +24,7 @@ namespace schedulerRestApi.Models
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                optionsBuilder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }
         }
     }
