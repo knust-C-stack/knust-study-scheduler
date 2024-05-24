@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("schedulerRestApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a58545578a7e3eb32bb65fb36d8e21d6ce5c0290")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+290732cb757825681ba588bfb999ec69b98102c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("schedulerRestApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("schedulerRestApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

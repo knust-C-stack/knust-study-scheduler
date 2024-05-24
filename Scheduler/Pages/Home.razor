@@ -5,50 +5,50 @@
 @using System.Threading.Tasks
 @inject HttpClient Http
 @inject NavigationManager Navigation
-@implements IDisposable
+@using MudBlazor
 
 <PageTitle>Home</PageTitle>
 
-<h1>Groups</h1>
+<h1 style="color: green;">Groups</h1>
 
 @if (groups == null)
 {
-    <p><em>Loading...</em></p>
+    <MudProgressCircular Indeterminate="true" />
 }
 else if (groups.Length == 0)
 {
-    <p>No groups found.</p>
+    <MudText>No groups found.</MudText>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created By</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var group in groups)
-            {
-                <tr>
-                    <td>@group.Name</td>
-                    <td>@group.Description</td>
-                    <td>@group.CreatedBy</td>
-                    <td>
-                        <button class="btn btn-primary" @onclick="() => UpdateGroup(group.Id)">Update</button>
-                        <button class="btn btn-danger" @onclick="() => DeleteGroup(group.Id)">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <MudTable Items="groups" Hover="true">
+        <HeaderContent>
+            <MudTh Style="font-weight: bold; color: green;">Name</MudTh>
+            <MudTh Style="font-weight: bold; color: green;">Description</MudTh>
+            <MudTh Style="font-weight: bold; color: green;">Created By</MudTh>
+            <MudTh Style="font-weight: bold; color: green;">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Description">@context.Description</MudTd>
+            <MudTd DataLabel="Created By">@context.CreatedBy</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton Color="Color.Primary" OnClick="@(() => UpdateGroup(@context.Id))" StartIcon="@Icons.Material.Filled.Edit">Update</MudButton>
+                <MudButton Color="Color.Error" OnClick="@(() => DeleteGroup(@context.Id))" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 }
+
+<MudAlert Severity="Severity.Success" IsVisible="successMessageVisible">@successMessage</MudAlert>
+<MudAlert Severity="Severity.Error" IsVisible="errorMessageVisible">@errorMessage</MudAlert>
 
 @code {
     private GroupDTO[] groups;
+    private string successMessage;
+    private string errorMessage;
+    private bool successMessageVisible;
+    private bool errorMessageVisible;
 
     protected override async Task OnInitializedAsync()
     {
@@ -80,17 +80,24 @@ else
             var response = await Http.DeleteAsync($"http://localhost:5132/api/Groups/{id}");
             if (response.IsSuccessStatusCode)
             {
+                successMessage = "Group deleted successfully!";
+                successMessageVisible = true;
+                errorMessageVisible = false;
                 // Reload the groups list after a successful delete
                 await LoadGroups();
             }
             else
             {
-                Console.WriteLine("Error deleting the group");
+                errorMessage = "Error deleting the group.";
+                errorMessageVisible = true;
+                successMessageVisible = false;
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            errorMessage = $"Error: {ex.Message}";
+            errorMessageVisible = true;
+            successMessageVisible = false;
         }
     }
 
