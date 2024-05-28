@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets/manifest.webmanifest"
     },
     {
+      "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/offline.js",
+      "PackagePath": "staticwebassets/offline.js"
+    },
+    {
       "Id": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/sample-data/weather.json",
       "PackagePath": "staticwebassets/sample-data/weather.json"
     },

@@ -1,11 +1,10 @@
 ﻿@page "/creategroup"
 @inject NavigationManager Navigation
-
+@inject IJSRuntime JS
 
 <PageTitle>Create Group</PageTitle>
 
 <h1>Create a New Group</h1>
-
 
 @if (successMessage != null)
 {
@@ -36,35 +35,88 @@
     <button type="submit" class="btn btn-primary">Create Group</button>
 </EditForm>
 
-
-
 @code {
     private GroupDTO newGroup = new GroupDTO();
     private string successMessage;
     private string errorMessage;
+    private bool isOnline = true;
 
     [Inject] private HttpClient Http { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        isOnline = await JS.InvokeAsync<bool>("localStorageHelper.isOnline");
+        await SyncPendingSubmissions();
+    }
+
     private async Task HandleValidSubmit()
     {
-        try
+        if (isOnline)
         {
-            var response = await Http.PostAsJsonAsync("http://localhost:5132/api/Groups", newGroup);
+            try
+            {
+                var response = await Http.PostAsJsonAsync("http://localhost:5132/api/Groups", newGroup);
 
-            if (response.IsSuccessStatusCode)
-            {
-                successMessage = "Group created successfully!";
-                newGroup = new GroupDTO(); // Reset the form
-                Navigation.NavigateTo("/");
+                if (response.IsSuccessStatusCode)
+                {
+                    successMessage = "Group created successfully!";
+                    newGroup = new GroupDTO(); // Reset the form
+                    Navigation.NavigateTo("/");
+                }
+                else
+                {
+                    errorMessage = "Error creating group.";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorMessage = "Error creating group.";
+                errorMessage = $"Error: {ex.Message}";
             }
         }
-        catch (Exception ex)
+        else
         {
-            errorMessage = $"Error: {ex.Message}";
+            var groupJson = System.Text.Json.JsonSerializer.Serialize(newGroup);
+            await JS.InvokeVoidAsync("localStorageHelper.savePendingSubmission", groupJson);
+            successMessage = "You are offline. The group will be added when you are back online.";
+            newGroup = new GroupDTO(); // Reset the form
+        }
+    }
+
+    [JSInvokable]
+    public async Task SetOnlineStatus(bool status)
+    {
+        isOnline = status;
+        if (isOnline)
+        {
+            await SyncPendingSubmissions();
+        }
+    }
+
+    private async Task SyncPendingSubmissions()
+    {
+        var pendingSubmissionsJson = await JS.InvokeAsync<string>("localStorageHelper.getPendingSubmissions");
+        var pendingSubmissions = System.Text.Json.JsonSerializer.Deserialize<List<GroupDTO>>(pendingSubmissionsJson);
+
+        if (pendingSubmissions != null && pendingSubmissions.Any())
+        {
+            foreach (var group in pendingSubmissions)
+            {
+                try
+                {
+                    var response = await Http.PostAsJsonAsync("http://localhost:5132/api/Groups", group);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Failed to sync pending submission.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = $"Error syncing data: {ex.Message}";
+                }
+            }
+
+            await JS.InvokeVoidAsync("localStorageHelper.clearPendingSubmissions");
+            successMessage = "Pending submissions have been synced.";
         }
     }
 

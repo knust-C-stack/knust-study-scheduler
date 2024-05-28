@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FvfTw8y7kQtawQnLwYTO8P8aUIUN2azNIrmOqYO2wVY=",
+  "Hash": "poFwfoBal8Smz7Ag5NqV2TPThwzHtSVgIMIwQoNbV1Y=",
   "Source": "Scheduler",
   "BasePath": "/",
   "Mode": "Root",
@@ -8375,6 +8375,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/manifest.webmanifest"
+    },
+    {
+      "Identity": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/offline.js",
+      "SourceId": "Scheduler",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "offline.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/offline.js"
     },
     {
       "Identity": "/home/sabs/project/dotnet/knust-study-scheduler/Scheduler/wwwroot/sample-data/weather.json",

@@ -6,10 +6,20 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @using MudBlazor
+@using Microsoft.JSInterop
 
 <PageTitle>Home</PageTitle>
 
 <h1 style="color: green;">Groups</h1>
+
+@if (successMessage != null)
+{
+    <div class="alert alert-success mt-3">@successMessage</div>
+}
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger mt-3">@errorMessage</div>
+}
 
 @if (groups == null)
 {
@@ -40,8 +50,6 @@ else
     </MudTable>
 }
 
-<MudAlert Severity="Severity.Success" IsVisible="successMessageVisible">@successMessage</MudAlert>
-<MudAlert Severity="Severity.Error" IsVisible="errorMessageVisible">@errorMessage</MudAlert>
 
 @code {
     private GroupDTO[] groups;
@@ -49,22 +57,43 @@ else
     private string errorMessage;
     private bool successMessageVisible;
     private bool errorMessageVisible;
+    private bool isOnline = true;
+
+    [Inject]
+    private IJSRuntime JS { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        isOnline = await JS.InvokeAsync<bool>("localStorageHelper.isOnline");
         await LoadGroups();
     }
 
     private async Task LoadGroups()
     {
-        try
+        if (isOnline)
         {
-            groups = await Http.GetFromJsonAsync<GroupDTO[]>("http://localhost:5132/api/Groups");
+            try
+            {
+                groups = await Http.GetFromJsonAsync<GroupDTO[]>("http://localhost:5132/api/Groups");
+                var groupsJson = System.Text.Json.JsonSerializer.Serialize(groups);
+                await JS.InvokeVoidAsync("localStorageHelper.setItem", "groups", groupsJson);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                groups = await LoadGroupsFromLocalStorage();
+            }
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine(ex.Message);
+            groups = await LoadGroupsFromLocalStorage();
         }
+    }
+
+    private async Task<GroupDTO[]> LoadGroupsFromLocalStorage()
+    {
+        var groupsJson = await JS.InvokeAsync<string>("localStorageHelper.getItem", "groups");
+        return groupsJson != null ? System.Text.Json.JsonSerializer.Deserialize<GroupDTO[]>(groupsJson) : new GroupDTO[0];
     }
 
     private void UpdateGroup(int id)
@@ -98,6 +127,16 @@ else
             errorMessage = $"Error: {ex.Message}";
             errorMessageVisible = true;
             successMessageVisible = false;
+        }
+    }
+
+    [JSInvokable]
+    public void SetOnlineStatus(bool status)
+    {
+        isOnline = status;
+        if (isOnline)
+        {
+            InvokeAsync(async () => await LoadGroups());
         }
     }
 

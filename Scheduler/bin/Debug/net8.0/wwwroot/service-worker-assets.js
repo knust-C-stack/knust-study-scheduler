@@ -25,12 +25,16 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-iy8GnisjNT234Bpw9PRekcpY7qe9Oivz4DqjAH\/e5pY=",
+      "hash": "sha256-wN3WO8zNs0lcCKMZRr3pQIl9AiTkHfPVxCwp1xNjFBs=",
       "url": "index.html"
     },
     {
       "hash": "sha256-sClIiur+Gqv4AdopxN0VSBGDWDaavtZMWK2Uddx0NCQ=",
       "url": "manifest.webmanifest"
+    },
+    {
+      "hash": "sha256-XxGEQzxgv0yigfyw9XrjL9e1XNCVsROCr2iZb4R4d2M=",
+      "url": "offline.js"
     },
     {
       "hash": "sha256-enKgCMkYmCpfEcmg6Annbmc40VZ\/A6aYYSQjZfVn2cU=",
@@ -877,15 +881,15 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-Oa\/ahoet2iAy1QVPFCGQ6QpOdRjob571+6YIYFJC7PI=",
+      "hash": "sha256-LQ\/bPrQi45EXoBhxoKhGA01impcAvETggsVgdKocURI=",
       "url": "_framework\/Scheduler.wasm"
     },
     {
-      "hash": "sha256-+ZSM6Rxx\/LYzeU2\/jWjTDZspcCcyTWDKh1uGjRYa16I=",
+      "hash": "sha256-4LK4gWEo9olgaePx5y7kxWK7TNKBiGWlpTW+y8oUs7E=",
       "url": "_framework\/Scheduler.pdb"
     },
     {
-      "hash": "sha256-0D3wV7bUKPLaRBd8P+DSFWugIBEAwB7nad5mWpwU9a8=",
+      "hash": "sha256-7Nk8wgzdE1Tc1CeMMeG5doI91aoqPF96ISKdL7hYrcQ=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -897,5 +901,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "tTHTCFC0"
+  "version": "sp9PTfvC"
 };

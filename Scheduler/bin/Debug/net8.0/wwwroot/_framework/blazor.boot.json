@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Scheduler",
   "resources": {
-    "hash": "sha256-k9j1+fa11AFZhyDjNuQOuVbfAp70s5wYFZOB2zq4fVw=",
+    "hash": "sha256-qPZn0Lh1GP5/1Kdy+8eqbeeRSo5RbyuM+pTJEHUyDMk=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.v7bpjkqwz2.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -216,10 +216,10 @@
       "mscorlib.wasm": "sha256-XvLAB5IyfVSmj5aaGnPwgVFaaZz8jXmbN8WmeopiPBM=",
       "netstandard.wasm": "sha256-TbMssdnuTiKq1gjTPkpgROAuWN0uhvPnagvWR+wAgNs=",
       "System.Private.CoreLib.wasm": "sha256-sscg+Efk8ROPq+q4IVmhShzITuoOYvB8Bsc+Mp9vcSM=",
-      "Scheduler.wasm": "sha256-Oa/ahoet2iAy1QVPFCGQ6QpOdRjob571+6YIYFJC7PI="
+      "Scheduler.wasm": "sha256-LQ/bPrQi45EXoBhxoKhGA01impcAvETggsVgdKocURI="
     },
     "pdb": {
-      "Scheduler.pdb": "sha256-+ZSM6Rxx/LYzeU2/jWjTDZspcCcyTWDKh1uGjRYa16I="
+      "Scheduler.pdb": "sha256-4LK4gWEo9olgaePx5y7kxWK7TNKBiGWlpTW+y8oUs7E="
     }
   },
   "cacheBootResources": true,
